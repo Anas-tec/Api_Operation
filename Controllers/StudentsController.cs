@@ -14,6 +14,7 @@ namespace Api_Test.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly StudentService _studentService;
+        private object studentService;
 
         public StudentsController(StudentService studentService)
         {
@@ -27,59 +28,51 @@ namespace Api_Test.Controllers
             return Ok(students);
         }
 
-        /*    private readonly ser service;
-            public StudentsController(ser service)
-            {
-                service = service;
-            }
-
-            [HttpGet]
-            public IActionResult GetStudents() 
-            {
-                var stu = service.GetStudents();
-                return Ok(stu);
-            }
+           
 
             [HttpPost]
             public IActionResult AddStudents(AddStudentDto addStudentDto) 
             {
-                var stu = new Student()
-                {
-                    Name=addStudentDto.Name,
-                    Age=addStudentDto.Age,
-                    FatherName=addStudentDto.FatherName
-                };
-                dbContext.Students.Add(stu);
-                dbContext.SaveChanges();
-                return Ok();
+                _studentService.AddStudents(addStudentDto);
+
+            return Ok(addStudentDto);
             }
 
-            [HttpPut]
-            public IActionResult UpdateStudents(int id, UpdateStudent updateStudent) 
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudent(int id, UpdateStudent updateStudent)
+        {
+            var updated = _studentService.UpdateStudent(id, updateStudent);
+            if (!updated)
             {
-                var stu = dbContext.Students.Find(id);
-                if (stu == null) 
-                {
-                    return NotFound();
-                }
-                stu.Name=updateStudent.Name;
-                stu.Age=updateStudent.Age;
-                stu.FatherName=updateStudent.FatherName;
-                dbContext.SaveChanges();
-                return Ok(stu);
+                return NotFound();
             }
+            return Ok(updated);
+        }
 
-            [HttpDelete]
-            public IActionResult DeleteStudent(int id) 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            var deleted = _studentService.DeleteStudent(id);
+            if (!deleted)
             {
-                var stu = dbContext.Students.Find(id);
-                if (stu == null)
+                return NotFound();
+            }
+            return Ok(deleted);
+        }
+
+
+
+        /*         [HttpDelete]
+                public IActionResult DeleteStudent(int id) 
                 {
-                    return NotFound();
-                }
-                dbContext.Remove(stu);
-                dbContext.SaveChanges();
-                return Ok(stu);
-            }*/
+                    var stu = dbContext.Students.Find(id);
+                    if (stu == null)
+                    {
+                        return NotFound();
+                    }
+                    dbContext.Remove(stu);
+                    dbContext.SaveChanges();
+                    return Ok(stu);
+                }*/
     }
 }
