@@ -24,8 +24,15 @@ namespace Api_Test.Controllers
         [HttpGet]
         public IActionResult GetStudents()
         {
-            var students = _studentService.GetStudents();
-            return Ok(students);
+            try
+            {
+                var students = _studentService.GetStudents();
+                return Ok(students);
+            }
+            catch (Exception ex) 
+            {
+                return NotFound(new { message = "An error occurred while fetching students." });
+            }
         }
 
            
@@ -33,31 +40,52 @@ namespace Api_Test.Controllers
             [HttpPost]
             public IActionResult AddStudents(AddStudentDto addStudentDto) 
             {
+            try
+            {
                 _studentService.AddStudents(addStudentDto);
 
-            return Ok(addStudentDto);
+                return Ok(addStudentDto);
             }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = "An error occurred while fetching students." });
+            }
+        }
 
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, UpdateStudent updateStudent)
         {
-            var updated = _studentService.UpdateStudent(id, updateStudent);
-            if (!updated)
+            try
             {
-                return NotFound();
+                var updated = _studentService.UpdateStudent(id, updateStudent);
+                if (!updated)
+                {
+                    return NotFound();
+                }
+                return Ok(updated);
             }
-            return Ok(updated);
+            catch (Exception ex)
+            {
+                return NotFound(new { message = "An error occurred while fetching students." });
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)
         {
-            var deleted = _studentService.DeleteStudent(id);
-            if (!deleted)
+            try
             {
-                return NotFound();
+                var deleted = _studentService.DeleteStudent(id);
+                if (!deleted)
+                {
+                    return NotFound();
+                }
+                return Ok(deleted);
             }
-            return Ok(deleted);
+            catch (Exception ex)
+            {
+                return NotFound(new { message = "An error occurred while fetching students." });
+            }
         }
 
 
