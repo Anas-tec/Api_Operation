@@ -2,6 +2,7 @@
 using Api_Test.Models.Data;
 using Api_Test.Models.Entities;
 using Api_Test.Models.StudentsDto;
+using Api_Test.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,59 +13,73 @@ namespace Api_Test.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
-        public StudentsController(ApplicationDbContext dbContext)
+        private readonly StudentService _studentService;
+
+        public StudentsController(StudentService studentService)
         {
-            this.dbContext = dbContext;
+            _studentService = studentService;
         }
 
         [HttpGet]
-        public IActionResult GetStudents() 
+        public IActionResult GetStudents()
         {
-            var stu = dbContext.Students.ToList();
-            return Ok(stu);
+            var students = _studentService.GetStudents();
+            return Ok(students);
         }
 
-        [HttpPost]
-        public IActionResult AddStudents(AddStudentDto addStudentDto) 
-        {
-            var stu = new Student()
+        /*    private readonly ser service;
+            public StudentsController(ser service)
             {
-                Name=addStudentDto.Name,
-                Age=addStudentDto.Age,
-                FatherName=addStudentDto.FatherName
-            };
-            dbContext.Students.Add(stu);
-            dbContext.SaveChanges();
-            return Ok();
-        }
-
-        [HttpPut]
-        public IActionResult UpdateStudents(int id, UpdateStudent updateStudent) 
-        {
-            var stu = dbContext.Students.Find(id);
-            if (stu == null) 
-            {
-                return NotFound();
+                service = service;
             }
-            stu.Name=updateStudent.Name;
-            stu.Age=updateStudent.Age;
-            stu.FatherName=updateStudent.FatherName;
-            dbContext.SaveChanges();
-            return Ok(stu);
-        }
 
-        [HttpDelete]
-        public IActionResult DeleteStudent(int id) 
-        {
-            var stu = dbContext.Students.Find(id);
-            if (stu == null)
+            [HttpGet]
+            public IActionResult GetStudents() 
             {
-                return NotFound();
+                var stu = service.GetStudents();
+                return Ok(stu);
             }
-            dbContext.Remove(stu);
-            dbContext.SaveChanges();
-            return Ok(stu);
-        }
+
+            [HttpPost]
+            public IActionResult AddStudents(AddStudentDto addStudentDto) 
+            {
+                var stu = new Student()
+                {
+                    Name=addStudentDto.Name,
+                    Age=addStudentDto.Age,
+                    FatherName=addStudentDto.FatherName
+                };
+                dbContext.Students.Add(stu);
+                dbContext.SaveChanges();
+                return Ok();
+            }
+
+            [HttpPut]
+            public IActionResult UpdateStudents(int id, UpdateStudent updateStudent) 
+            {
+                var stu = dbContext.Students.Find(id);
+                if (stu == null) 
+                {
+                    return NotFound();
+                }
+                stu.Name=updateStudent.Name;
+                stu.Age=updateStudent.Age;
+                stu.FatherName=updateStudent.FatherName;
+                dbContext.SaveChanges();
+                return Ok(stu);
+            }
+
+            [HttpDelete]
+            public IActionResult DeleteStudent(int id) 
+            {
+                var stu = dbContext.Students.Find(id);
+                if (stu == null)
+                {
+                    return NotFound();
+                }
+                dbContext.Remove(stu);
+                dbContext.SaveChanges();
+                return Ok(stu);
+            }*/
     }
 }
