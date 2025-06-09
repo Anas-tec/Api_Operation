@@ -13,6 +13,11 @@ namespace Api_Test.Services
         {
             _dbContext = dbContext;
         }
+
+        public StudentService()
+        {
+        }
+
         public List<Student> GetStudents()
         {
             return _dbContext.Students.ToList();
