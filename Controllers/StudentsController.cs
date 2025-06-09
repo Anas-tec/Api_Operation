@@ -13,10 +13,10 @@ namespace Api_Test.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly StudentService _studentService;
+        private readonly IStudent _studentService;
         private object studentService;
 
-        public StudentsController(StudentService studentService)
+        public StudentsController(IStudent studentService)
         {
             _studentService = studentService;
         }
