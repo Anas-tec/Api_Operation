@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api_Test.Services
 {
-    public class StudentService
+    public class StudentService : IStudent,IStudentUD
     {
         private readonly ApplicationDbContext _dbContext;
         public StudentService(ApplicationDbContext dbContext)

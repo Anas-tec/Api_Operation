@@ -13,13 +13,16 @@ namespace Api_Test.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly StudentService _studentService;
-        private object studentService;
+        private readonly IStudent _studentService;
+        private readonly IStudentUD _studentUDService;
 
-        public StudentsController(StudentService studentService)
+        public StudentsController(IStudent studentService, IStudentUD studentUDservice)
         {
             _studentService = studentService;
+            _studentUDService = studentUDservice;
         }
+       
+
 
         [HttpGet]
         public IActionResult GetStudents()
@@ -57,7 +60,7 @@ namespace Api_Test.Controllers
         {
             try
             {
-                var updated = _studentService.UpdateStudent(id, updateStudent);
+                var updated = _studentUDService.UpdateStudent(id, updateStudent);
                 if (!updated)
                 {
                     return NotFound();
@@ -75,7 +78,7 @@ namespace Api_Test.Controllers
         {
             try
             {
-                var deleted = _studentService.DeleteStudent(id);
+                var deleted = _studentUDService.DeleteStudent(id);
                 if (!deleted)
                 {
                     return NotFound();

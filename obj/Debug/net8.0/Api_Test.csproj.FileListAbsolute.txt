@@ -262,3 +262,4 @@ D:\VS_2022\Api_Test\obj\Debug\net8.0\refint\Api_Test.dll
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.pdb
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.genruntimeconfig.cache
 D:\VS_2022\Api_Test\obj\Debug\net8.0\ref\Api_Test.dll
+D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
