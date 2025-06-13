@@ -1,4 +1,5 @@
 using Api_Test.Models.Data;
+using Api_Test.Repository;
 using Api_Test.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IStudent, StudentService>();
 builder.Services.AddScoped<IStudentUD, StudentService>();
 
+
+//builder.Services.AddScoped<IStudent, StudentRepository>();
+//builder.Services.AddScoped<IStudentUD, StudentRepository>();
+//builder.Services.AddScoped<StudentRepository>();
 
 var app = builder.Build();
 

@@ -29,6 +29,7 @@ D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
@@ -255,11 +256,10 @@ D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.build.json
 D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.development.json
 D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.csproj.Up2Date
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.dll
 D:\VS_2022\Api_Test\obj\Debug\net8.0\refint\Api_Test.dll
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.pdb
 D:\VS_2022\Api_Test\obj\Debug\net8.0\Api_Test.genruntimeconfig.cache
 D:\VS_2022\Api_Test\obj\Debug\net8.0\ref\Api_Test.dll
-D:\VS_2022\Api_Test\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\VS_2022\Api_Test\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

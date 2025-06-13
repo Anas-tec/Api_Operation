@@ -90,20 +90,5 @@ namespace Api_Test.Controllers
                 return NotFound(new { message = "An error occurred while fetching students." });
             }
         }
-
-
-
-        /*         [HttpDelete]
-                public IActionResult DeleteStudent(int id) 
-                {
-                    var stu = dbContext.Students.Find(id);
-                    if (stu == null)
-                    {
-                        return NotFound();
-                    }
-                    dbContext.Remove(stu);
-                    dbContext.SaveChanges();
-                    return Ok(stu);
-                }*/
     }
 }

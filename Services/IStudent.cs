@@ -7,6 +7,5 @@ namespace Api_Test.Services
     {
         public List<Student> GetStudents();
         public void AddStudents(AddStudentDto addStudentDto);
-        
     }
 }
