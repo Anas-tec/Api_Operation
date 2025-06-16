@@ -20,7 +20,8 @@ namespace Api_Test.Services
         }
         public List<Student> GetStudents()
         {
-            return _repository.GetStudents();
+            var students = _repository.GetStudents();
+            return students;
         }
         public void AddStudents(AddStudentDto addStudentDto)
         {
