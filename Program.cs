@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IStudent, StudentService>();
 builder.Services.AddScoped<IStudentUD, StudentService>();
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 //builder.Services.AddScoped<IStudent, StudentRepository>();
 //builder.Services.AddScoped<IStudentUD, StudentRepository>();
