@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        #header {
+            background-color: deepskyblue;
+            text-align: center;
+            padding: 20px 5px;
+        }
+        #footer {
+            background-color: aquamarine;
+            text-align: center;
+            padding: 20px 5px;
+        }
+        #content 
+        {
+            background-color:whitesmoke;
+            margin-top:10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header"><h1>This is Confirmation mail</h1><p>Check the given details are correct,if its worng inform to your manager</p></div>
+    <div id="content">
+        <h2>Welcome, {{empName}}!</h2>
+        <p>Your employee account has been created successfully.</p>
+        <p>Email: {{empEmail}}</p>
+        <p>Phone: {{empPhone}}</p>
+    </div>
+    <div id="footer">
+        <p>Thank you for joining our team!</p>
+    </div>
+</body>
+</html>

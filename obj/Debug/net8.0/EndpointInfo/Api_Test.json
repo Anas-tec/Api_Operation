@@ -359,11 +359,11 @@
             "type": "string",
             "nullable": true
           },
-          "subject": {
+          "name": {
             "type": "string",
             "nullable": true
           },
-          "body": {
+          "phone": {
             "type": "string",
             "nullable": true
           }

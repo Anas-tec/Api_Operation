@@ -7,15 +7,24 @@ namespace Api_Test.Services
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _config;
+        private readonly IWebHostEnvironment _env;
 
-        public EmailService(IConfiguration config)
+        public EmailService(IConfiguration config, IWebHostEnvironment env)
         {
             _config = config;
+            _env = env;
         }
 
         public async Task SendEmailAsync(EmailRequest request)
         {
             var emailSettings = _config.GetSection("EmailSettings");
+
+            var templatePath = Path.Combine(_env.ContentRootPath, "Template", "ConfirmationTemplate.html");
+            var htmlTemplate= await File.ReadAllTextAsync(templatePath);
+            htmlTemplate = htmlTemplate
+                .Replace("{{empName}}", request.Name ?? "User")
+                .Replace("{{empEmail}}", request.ToEmail ?? "User@mail.com")
+                .Replace("{{empPhone}}", request.Phone ?? "999999999");
 
             var smtpClient = new SmtpClient(emailSettings["SmtpServer"])
             {
@@ -27,8 +36,8 @@ namespace Api_Test.Services
             var mailMessage = new MailMessage
             {
                 From = new MailAddress(emailSettings["SenderEmail"], emailSettings["SenderName"]),
-                Subject = request.Subject,
-                Body = request.Body,
+                Subject = "confirmation mail",
+                Body = htmlTemplate,
                 IsBodyHtml = true,
             };
 

@@ -1,6 +1,7 @@
 ﻿using Api_Test.Models;
 using Api_Test.Models.Data;
 using Api_Test.Models.Entities;
+using Api_Test.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
@@ -12,9 +13,11 @@ namespace Api_Test.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ApplicationDbContext dbContext;
-        public EmployeesController(ApplicationDbContext dbContext)
+        private readonly IEmailService emailService;
+        public EmployeesController(ApplicationDbContext dbContext/*, IEmailService emailService*/)
         {
             this.dbContext = dbContext;
+            //this.emailService = emailService;
         }
         [HttpGet]
         public IActionResult GetAllEmployees()
@@ -37,6 +40,7 @@ namespace Api_Test.Controllers
 
         [HttpPost]
         public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
+        //public async Task<IActionResult> AddEmployee(AddEmployeeDto addEmployeeDto)
         {
             var employeeEntity = new Employee()
             { 
@@ -48,6 +52,14 @@ namespace Api_Test.Controllers
 
             dbContext.Employees.Add(employeeEntity);
             dbContext.SaveChanges();
+
+           /* var emailRequest = new EmailRequest
+            {
+                ToEmail = addEmployeeDto.Email,
+                Subject = "Welcome to the Company!",
+                Body = $"<h3>Hello {addEmployeeDto.Name},</h3><p>Your profile has been created successfully.</p>"
+            };*/
+
             return Ok(employeeEntity);
         }
 
