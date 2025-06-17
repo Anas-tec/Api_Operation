@@ -43,6 +43,13 @@ namespace Api_Test.Services
 
             mailMessage.To.Add(request.ToEmail);
 
+            //attachment part
+            if (!string.IsNullOrEmpty(request.AttachmentPath)&&File.Exists(request.AttachmentPath)) 
+            {
+                var attachment = new Attachment(request.AttachmentPath);
+                mailMessage.Attachments.Add(attachment);
+            }
+
             await smtpClient.SendMailAsync(mailMessage);
         }
     }

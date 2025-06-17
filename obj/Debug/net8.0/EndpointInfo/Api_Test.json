@@ -366,6 +366,10 @@
           "phone": {
             "type": "string",
             "nullable": true
+          },
+          "attachmentPath": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
