@@ -94,7 +94,7 @@ namespace Api_Test.Controllers
         //fethiching data with given details 
         [HttpGet]
         [Route("GetEmployeesByvalue")]
-        public IActionResult GetEmployeesByvalue(Guid? id,string? name,string? phone,string? email,decimal? salary)
+        public IActionResult GetEmployeesByvalue(Guid? id,string? name,string? phone,string? email,decimal? salary,int? pageNumber)
         {
             var query = dbContext.Employees.AsQueryable();
             if (id.HasValue) 
@@ -118,13 +118,30 @@ namespace Api_Test.Controllers
                 query=query.Where(e=>e.Salary==salary.Value);
             }
 
-            var total=query.ToList();
+            var totalRecords = query.Count();
+            int pageSize = 3;
+            int currentPage = pageNumber ?? 1;
 
-            if (total.Count == 0) 
+            var pagedEmployees = query
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            if (totalRecords == 0)
             {
                 return NotFound("there is no data to fetch");
             }
-            return Ok(total);
+
+            var response = new
+            {
+                Data = pagedEmployees,//data lists
+                TotalRecords = totalRecords,//tatal no of data-optional
+                PageNumber = currentPage,//pagenumber-optional
+                PageSize = pageSize,//page size-optional
+                TotalPages = Math.Ceiling(totalRecords / (double)pageSize)
+            };
+            
+            return Ok(response);
         }
 
 
