@@ -21,12 +21,37 @@ namespace Api_Test.Controllers
         }
         [HttpGet]
         [Route("GetAllEmployee")]
-        public IActionResult GetAllEmployees()
+        /*public IActionResult GetAllEmployees()
         {
             var allEmployees = dbContext.Employees.ToList();
             return Ok(allEmployees);
-        }
+        }*/
 
+
+        //with pagination
+        public IActionResult GetAllEmployees(int pageNumber/*,int pageSize*/)
+        {
+            int pageSize = 3;//constant value use this or dinamic/change the size go with top
+            var query = dbContext.Employees.AsQueryable();
+
+            var totalRecords = query.Count(); // this is for verify the data count-optional
+
+            var pagedEmployees = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var response = new
+            {
+                TotalRecords = totalRecords,//tatal no of data-optional
+                PageNumber = pageNumber,//pagenumber-optional
+                PageSize = pageSize,//page size-optional
+                Data = pagedEmployees//data lists
+            };
+
+            return Ok(response);
+            //return Ok(pagedEmployees);//this is for show only data/pagedEmployees
+        }
 
 
 
