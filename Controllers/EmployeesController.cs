@@ -20,15 +20,22 @@ namespace Api_Test.Controllers
             //this.emailService = emailService;
         }
         [HttpGet]
+        [Route("GetAllEmployee")]
         public IActionResult GetAllEmployees()
         {
             var allEmployees = dbContext.Employees.ToList();
             return Ok(allEmployees);
         }
 
+
+
+
+
+        /*
+         // this method return single emplyee with id(primary key)
         [HttpGet]
-        [Route("{id:guid}")]
-        public IActionResult GetEmployeeById(Guid id) 
+        [Route("GetEmployeeById")]
+        public IActionResult GetEmployeeById(Guid id)
         {
             var employee = dbContext.Employees.Find(id);
             if (employee == null)
@@ -36,7 +43,65 @@ namespace Api_Test.Controllers
                 return NotFound();
             }
             return Ok(employee);
+        }*/
+
+        /* 
+        // this can generate all employe even the user did not giv the id,user gives an id it return the specific employee
+        [HttpGet]
+        [Route("GetEmployeeById")]
+        public IActionResult GetEmployeeById(Guid? id) 
+        {
+            if (id.HasValue)
+            {
+                var employee = dbContext.Employees.Find(id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                return Ok(employee);
+            }
+        var employees = dbContext.Employees.ToList();
+        return Ok(employees);
+        }*/
+
+
+
+        //fethiching data with given details 
+        [HttpGet]
+        [Route("GetEmployeesByvalue")]
+        public IActionResult GetEmployeesByvalue(Guid? id,string? name,string? phone,string? email,decimal? salary)
+        {
+            var query = dbContext.Employees.AsQueryable();
+            if (id.HasValue) 
+            {
+                query = query.Where(e=>e.Id==id.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                query=query.Where(e=>e.Name.Contains(name));
+            }
+            if (!string.IsNullOrWhiteSpace(phone))
+            {
+                query=query.Where(e=>e.Phone.Contains(phone));
+            }
+            if (!string.IsNullOrWhiteSpace(email)) 
+            {
+                query = query.Where(e => e.Email.Contains(email));
+            }
+            if (salary.HasValue) 
+            {
+                query=query.Where(e=>e.Salary==salary.Value);
+            }
+
+            var total=query.ToList();
+
+            if (total.Count == 0) 
+            {
+                return NotFound("there is no data to fetch");
+            }
+            return Ok(total);
         }
+
 
         [HttpPost]
         public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
